@@ -1,5 +1,12 @@
 # Meteor 2.6 + Mongo 1.14.1 Issue
 
+***
+THIS BRANCH HAS BEEN DOWNGRADED TO METEOR 2.5.6 AND MONGO 1.13.0
+
+THE ISSUE IS NOT PRESENT ON THIS BRANCH.
+
+***
+
 This repository demonstrates an issue with Mongo 1.14.1. 
 
 Adding a new field to a document, with the following shape 
