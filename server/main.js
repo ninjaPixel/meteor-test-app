@@ -1,37 +1,22 @@
-import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
+import {Meteor} from 'meteor/meteor';
+import {InventoryCollection} from '/imports/api/inventory';
 
-function insertLink({ title, url }) {
-  LinksCollection.insert({title, url, createdAt: new Date()});
-}
 
 Meteor.startup(() => {
-  // If the Links collection is empty, add some data.
-  if (LinksCollection.find().count() === 0) {
-    insertLink({
-      title: 'Document 1',
-
-    });
-
-    insertLink({
-      title: 'Document 2',
-
-    });
-
-    insertLink({
-      title: 'Document 3',
-
-    });
-
-    insertLink({
-      title: 'Document 4',
-
-    });
-  }
+    // If the collection is empty, add some data.
+    if (InventoryCollection.find().count() === 0) {
+        InventoryCollection.insert({shop: 'New York'})
+        InventoryCollection.insert({shop: 'London'})
+        InventoryCollection.insert({shop: 'Paris'})
+        InventoryCollection.insert({shop: 'Sydney'})
+        InventoryCollection.insert({shop: 'Rio'})
+        InventoryCollection.insert({shop: 'Hong Kong'})
+    }
 });
+
 Meteor.methods({
-  addArrayField:({_id})=>{
-    // return LinksCollection.update({_id}, {$set:{'newArrayField':['Apple', 'Google', 'Linux']}})
-    return LinksCollection.update({_id}, {$set:{'newObjectField':{newArrayField: ['Apple', 'Google', 'Linux']}}})
-  }
+    addNewField: ({_id}) => {
+        console.log('Adding t-shirt sizes 👕 to', _id)
+        return InventoryCollection.update({_id}, {$set: {'tShirt': {sizes: ['small', 'medium', 'large']}}})
+    }
 })
